@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Локальный прототип маркетплейса аренды оборудования для мероприятий">
+  <title>RENT.EVENT — оборудование по запросу</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="RENT.EVENT — главная"><span class="brand-mark">R</span><span>RENT<span class="accent">.</span>EVENT</span></a>
+    <nav><a href="#catalog">Каталог</a><a href="#how">Как это работает</a><a href="#owner">Сдать оборудование</a></nav>
+    <button class="nav-cta" id="myBookingsBtn">Мои бронирования <span id="bookingCount">0</span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> ЛОКАЛЬНАЯ АРЕНДА ОБОРУДОВАНИЯ</p>
+        <h1>Нужная техника.<br><em>В нужную дату.</em></h1>
+        <p class="hero-lead">Находите оборудование для мероприятий у локальных владельцев — без покупки техники, которая будет простаивать.</p>
+        <a class="primary-btn" href="#catalog">Найти оборудование <span>↗</span></a>
+        <div class="hero-note"><span>01</span> Каталог · Даты · Бронирование</div>
+      </div>
+      <div class="hero-art">
+        <div class="art-grid"></div>
+        <div class="art-label">EQUIPMENT<br>ON DEMAND</div>
+        <div class="equipment-card"><div class="eq-icon">◉</div><span>EVENT<br>READY</span><b>24/7</b></div>
+        <div class="art-number">01<span> / 04</span></div>
+      </div>
+    </section>
+
+    <section class="trust-strip">
+      <div><strong>01</strong><span>Выбирайте по категории</span></div>
+      <div><strong>02</strong><span>Проверяйте даты и цену</span></div>
+      <div><strong>03</strong><span>Отправляйте заявку владельцу</span></div>
+      <div><strong>04</strong><span>Получайте подтверждение</span></div>
+    </section>
+
+    <section class="section" id="catalog">
+      <div class="section-head">
+        <div><p class="eyebrow">КАТАЛОГ / 2026</p><h2>Оборудование<br><em>для вашего события</em></h2></div>
+        <p class="section-description">Демо-каталог с тестовыми предложениями. Выберите позицию, укажите даты и отправьте заявку на аренду.</p>
+      </div>
+      <div class="filters">
+        <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Например, проектор или дым"></label>
+        <select id="categoryFilter" aria-label="Категория">
+          <option value="all">Все категории</option><option value="Свет">Свет</option><option value="Звук">Звук</option><option value="Эффекты">Эффекты</option><option value="Видео">Видео</option>
+        </select>
+        <select id="sortFilter" aria-label="Сортировка"><option value="default">Сначала рекомендуемые</option><option value="price">Сначала дешевле</option></select>
+      </div>
+      <div class="catalog-grid" id="catalogGrid" aria-live="polite"></div>
+      <p class="empty-state hidden" id="emptyState">По вашему запросу ничего не найдено. Попробуйте изменить фильтры.</p>
+    </section>
+
+    <section class="how-section" id="how">
+      <div class="how-title"><p class="eyebrow">ПРОСТОЙ СЦЕНАРИЙ</p><h2>От поиска<br><em>до брони</em></h2></div>
+      <div class="steps">
+        <div class="step"><span>01</span><h3>Найти</h3><p>Выберите категорию и подходящее оборудование в каталоге.</p></div>
+        <div class="step"><span>02</span><h3>Забронировать</h3><p>Укажите даты аренды и контактные данные для связи.</p></div>
+        <div class="step"><span>03</span><h3>Подтвердить</h3><p>Заявка сохранится в личном списке бронирований.</p></div>
+      </div>
+    </section>
+
+    <section class="owner-section" id="owner">
+      <div><p class="eyebrow">ДЛЯ ВЛАДЕЛЬЦЕВ</p><h2>Техника может<br><em>приносить доход</em></h2><p>Добавьте оборудование в демо-каталог и проверьте, как выглядит предложение для арендатора.</p></div>
+      <form id="ownerForm" class="owner-form">
+        <label>Название оборудования<input name="title" required placeholder="Например, LED PAR 18×10W"></label>
+        <div class="form-row"><label>Категория<select name="category"><option>Свет</option><option>Звук</option><option>Эффекты</option><option>Видео</option></select></label><label>Цена за сутки, ₽<input name="price" type="number" min="1" required placeholder="1500"></label></div>
+        <label>Город<input name="city" required placeholder="Санкт-Петербург"></label>
+        <button class="primary-btn full" type="submit">Добавить в каталог <span>＋</span></button>
+        <p class="form-hint">Добавленная позиция сохраняется в этом браузере.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#"><span class="brand-mark">R</span><span>RENT<span class="accent">.</span>EVENT</span></a><span>Локальная аренда оборудования · Демонстрационный MVP</span><span>© 2026</span></footer>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Закрыть">×</button>
+      <div id="modalContent"></div>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
